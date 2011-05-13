@@ -1,0 +1,103 @@
+#!/usr/bin/env ruby
+
+# A few helpful tips about the Rules file:
+#
+# * The order of rules is important: for each item, only the first matching
+#   rule is applied.
+#
+# * Item identifiers start and end with a slash (e.g. “/about/” for the file
+#   “content/about.html”). To select all children, grandchildren, … of an
+#   item, use the pattern “/about/*/”; “/about/*” will also select the parent,
+#   because “*” matches zero or more characters.
+
+require 'compass'
+Compass.add_project_configuration 'config/compass.rb'
+
+require 'active_support/core_ext/string'
+
+#
+# Precproccessing rules
+#
+preprocess do
+  # authors may unpublish items by setting meta attribute publish: false
+  items.delete_if { |item| item[:publish] == false }
+
+  # set sensible defaults for attributes
+  items.each do |item|
+    item[:is_hidden] = true if item.binary?
+    if item.identifier =~ %r(^/blog\/articles/) && !item.binary?
+      item[:kind] ||= 'article'
+      item[:updated_at] ||= item.mtime
+    end
+  end
+
+  #create_category_pages
+
+  #copy_static
+end
+
+#
+# Compile
+#
+
+# Don't render partials
+compile '/assets/img/*/' do
+  nil
+end
+
+compile '/assets/css/_*/' do
+  nil
+end
+
+compile '/assets/js/*/' do
+  nil
+end
+
+compile '/assets/css/*/' do
+  filter :sass, Compass.sass_engine_options
+end
+
+compile '*' do
+  apply_filters_and_layout
+  #filter :haml, :ugly => true, :attr_wrapper => '"', :format => :html5
+  #layout 'default'
+end
+
+#
+# Routes
+#
+
+# Don't output partials
+route '/assets/css/_*/' do
+  nil
+end
+
+route '/assets/js/*/' do
+  item.identifier.chop + '.js'
+end
+
+route '/assets/css/*/' do
+   item.identifier.chop + '.css'
+end
+
+route '/articles/*/' do
+  if item.binary?
+    item.identifier.sub(/^\/blog\/articles/,'').chop + '.' + item[:extension]
+  else
+    item.identifier.sub(/^\/blog\/articles/,'') + 'index.html'
+  end
+end
+
+route '/feed/atom/' do
+  item.identifier.chop + '.xml'
+end
+
+route '*' do
+  if item.binary?
+    item.identifier.chop + '.' + item[:extension]
+  else
+    item.identifier + 'index.html'
+  end
+end
+
+layout '*', :haml, :attr_wrapper => '"', :ugly => true, :format => :html5  # :ugly is essential to have code blocks not further indented

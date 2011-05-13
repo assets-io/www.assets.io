@@ -1,0 +1,37 @@
+.content_wrap
+  .content_pad
+    .sixcol
+      %h2 How you did it before
+      %p This is how your statically linked assets in the head of your website might look like. They would be served by your server via 5 separate requests.
+      %pre.code
+        :escaped
+          <head>
+            <title>My website</title>
+
+            <!-- Stylesheets //-->
+            <link rel="stylesheet" href="/css/base.css" />
+            <link rel="stylesheet" href="/css/navigation.css" />
+
+            <!-- Javascript //-->
+            <script src="/js/jquery.js"></script>
+            <script src="/js/plugin.js"></script>
+            <script src="/js/site.js"></script>
+
+          </head>
+
+    .sixcol.last
+      %h2 With Assets.io
+      %p And this is the same code rewritten using our API, but now the assets are packaged, minified and served via CDN! The number of requests is also reduced from 5 to 3.
+      %pre.code
+        :escaped
+          <head>
+            <title>My website</title>
+
+            <script src="http://api.assets.io/?<your-acccount-id>"></script>
+
+            <script type="text/javascript">
+              assets.css("/css/base.css /css/navigation.css");
+              assets.js("/js/jquery.js /js/plugin.js /js/site.js");
+            </script>
+
+          </head>

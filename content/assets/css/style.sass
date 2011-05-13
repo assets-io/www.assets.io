@@ -1,0 +1,308 @@
+@import "compass/reset"
+@import "compass/css3"
+@import "compass/layout/sticky-footer"
+@import "eleven40/mobile"
+@import "eleven40/base"
+@import "mailchimp"
+
+$text-color: #333
+$link-color: #a13510
+
+$default-text-shadow-color: rgba(white, .7)
+$default-text-shadow-blur: 1px
+$default-text-shadow-v-offset: 1px
+$default-text-shadow-h-offset: 1px
+$default-border-radius: 5px
+
+$default-box-shadow-color: #AAA
+$default-box-shadow-h-offset: 2px
+$default-box-shadow-v-offset: 2px
+$default-box-shadow-blur: 8px
+$default-box-shadow-spread: false
+$default-box-shadow-inset: false
+
+$mobile-max-width: 767px
+
+@include sticky-footer(200px, "#container", "#container_footer", "#footer")
+
+@media screen
+  @media (max-width: 767px)
+    @include sticky-footer(300px, "#container", "#container_footer", "#footer")
+
+body,html
+  :height 100%
+  :width  100%
+body
+  :background   url('/assets/img/main_background.jpg') top left #fff
+  :font-family  "Helvetica Neue", Helvetica, Arial, sans-serif
+  :line-height  150%
+  :height       100%
+  @media screen
+    @media (max-width: 767px)
+      :font-size 0.9em
+
+#header
+  :height     200px
+  :background url('/assets/img/header_background.jpg') repeat-x top left transparent
+  +single-box-shadow
+  @include eleven40-container
+  :padding 0 40px
+
+  @media screen
+    @media (max-width: 767px)
+      @include eleven40-mobile-full
+      :height 160px
+      :padding 0 20px
+      :width auto
+
+  #logo
+    :padding 70px 0 0 0
+    @include eleven40-fourcol
+
+    @media screen
+      @media (max-width: 767px)
+        @include eleven40-mobile-column
+        :padding 30px 0 0 0
+        :text-align center
+
+  #nav
+    :padding 90px 0 0 0
+    :text-align right
+    @include eleven40-eightcol
+    @include eleven40-last
+
+    @media screen
+      @media (max-width: 767px)
+        @include eleven40-mobile-column
+        :padding 20px 0 0 0
+        :text-align center
+
+    a
+      :color #fff
+      :font-size 1.2em
+      :text-decoration none
+      :margin-right 25px
+      +single-text-shadow(#000,1px,1px,4px)
+      :text-transform uppercase
+
+      @media screen
+        @media (max-width: 767px)
+          :font-size 0.9em
+          :margin-right 13px
+
+    a:last-child
+      :margin-right 0
+
+
+.content_wrap
+  @include eleven40-row
+
+.content_pad
+  :padding-top 60px
+
+h1
+  :font-size 2em
+  :color $text-color
+  +single-text-shadow
+  :margin 0 0 20px 0
+  @media screen
+    @media (max-width: 767px)
+      :font-size 1.5em
+      :margin 30px 0 10px 0
+h2
+  :font-size 1.75em
+  :color $text-color
+  +single-text-shadow
+  :margin 0 0 10px 0
+  @media screen
+    @media (max-width: 767px)
+      :font-size 1.25em
+h3
+  :font-size 1.5em
+  :color $text-color
+  :margin 0 0 10px 0
+  :font-weight bold
+  @media screen
+    @media (max-width: 767px)
+      :font-size 1.2em
+h4
+  :font-size 1em
+  :color $text-color
+  :margin 0
+  :font-weight bold
+  @media screen
+    @media (max-width: 767px)
+      :font-size 0.8em
+h5
+  :font-size 0.8em
+  :color $text-color
+  :margin 0
+  :font-weight bold
+p
+  :font-size 1em
+  :color $text-color
+  +single-text-shadow
+  :margin-bottom 20px
+a
+  :text-decoration none
+  :color $link-color
+pre.code
+  :background-color #222
+  :color #fff
+  +border-radius
+  :padding 10px
+  :margin-bottom 20px
+  :font-family menlo, monaco, 'andale mono', 'courier new', fixed
+  :font-size 0.8em
+  :line-height 150%
+  +box-shadow(#000 1px 1px 8px 1px inset, #FFF 1px 1px 2px 0)
+  :overflow hidden
+
+#main
+  @include eleven40-container
+  :padding 0 40px 40px 40px
+  @media screen
+    @media (max-width: 767px)
+      :padding 0 20px 20px 20px
+      @include eleven40-mobile-column
+      :line-height 140%
+
+#teaser
+  :height 319px
+  :background url('/assets/img/waiter.png') no-repeat top center transparent
+  @include eleven40-row
+
+  @media screen
+    @media (max-width: 767px)
+      :height 200px
+      :background url('/assets/img/waiter_small.png') no-repeat top center transparent
+      :padding 0 20px
+
+  #teaser_right
+    :float right
+    :margin-top 150px
+    :width 230px
+    :height 148px
+    :background url('/assets/img/teaser_right.png') no-repeat top center transparent
+
+    @media screen
+      @media (max-width: 767px)
+        :margin-top 10px
+        :width 263px
+        :height 190px
+        :background url('/assets/img/teaser_right_small.png') no-repeat top center transparent
+
+  #teaser_left
+    :float left
+    :margin-top 195px
+    :width 348px
+    :height 105px
+    :background url('/assets/img/teaser_left.png') no-repeat top center transparent
+
+    @media screen
+      @media (max-width: 767px)
+        :display none
+
+.box
+  :background-color #fff
+  :padding 20px
+  @include border-radius
+  +single-box-shadow
+  @include eleven40-row
+  :width auto
+
+  @media screen
+    @media (max-width: 767px)
+      :padding 20px 0px
+
+  .feature
+    @include eleven40-sixcol
+
+    @media screen
+      @media (max-width: 767px)
+        @include eleven40-mobile-column
+
+  .feature.last
+    @include eleven40-last
+
+#footer
+  :background url('/assets/img/footer_background.jpg') top center #222
+  :color #FFF
+  :text-align left
+  :font-size 0.9em
+  @include eleven40-container
+  :padding 20px 40px
+  +box-shadow(#000 1px 1px 15px 1px inset)
+
+  .fourcol
+    @include eleven40-fourcol
+    :margin-bottom 20px
+    @media screen
+      @media (max-width: 767px)
+        @include eleven40-mobile-column
+        :text-align center
+    h3
+      :color #fff
+      :font-size 1.2em
+      :margin 0
+    strong
+      :font-weight bold
+    a
+      :color #fff
+
+  .fourcol.last
+    @include eleven40-last
+
+  @media screen
+    @media (max-width: 767px)
+      :padding 10px 20px
+      @include eleven40-mobile-column
+
+
+.fourcol
+  @include eleven40-fourcol
+  @media screen
+    @media (max-width: 767px)
+      @include eleven40-mobile-column
+
+.sixcol
+  @include eleven40-sixcol
+  @media screen
+    @media (max-width: 767px)
+      @include eleven40-mobile-column
+      :padding 0
+
+.eightcol
+  @include eleven40-eightcol
+  @media screen
+    @media (max-width: 767px)
+      @include eleven40-mobile-column
+
+.last
+  @include eleven40-last
+
+//
+// Blog
+//
+.metadata
+  :margin-bottom 20px
+
+//
+// Mailchimp
+//
+#mc_embed_signup
+  label
+    :display block
+    :width 100%
+    :font-size 0.9em
+    +single-text-shadow(#fff,1px,1px,4px)
+
+  input.mc-text
+    :padding 5px
+    :border 3px solid #AAA
+    :background #FFF
+    :width 90%
+
+  .response
+    :font-size 0.9em
+    +single-text-shadow(#fff,1px,1px,4px)

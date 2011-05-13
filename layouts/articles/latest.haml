@@ -1,0 +1,8 @@
+%h2 Latest Blog entries
+%ul.toc
+  - sorted_articles.first(@site.config[:articles_on_homepage]).each do |article|
+    %li.article-headline= render 'articles/article_header', :article => article, :headline_tag => 'h4', :subheadline_tag => 'h5'
+
+- if articles.size > @site.config[:articles_on_homepage]
+  %a.archive(href="/archive/") Looking for older articles? Visit the archive.
+

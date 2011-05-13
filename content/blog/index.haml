@@ -1,0 +1,8 @@
+
+.content_wrap
+  .content_pad
+    .eightcol
+      - sorted_articles.first(@site.config[:articles_on_homepage]).each do |article|
+        = render 'articles/article', :article => article
+    .fourcol.last
+      = render 'articles/latest'

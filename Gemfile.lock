@@ -1,0 +1,37 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    activesupport (3.0.6)
+    adsf (1.0.1)
+      rack (>= 1.0.0)
+    builder (3.0.0)
+    chunky_png (1.1.1)
+    compass (0.11.1)
+      chunky_png (~> 1.1)
+      fssm (>= 0.2.7)
+      sass (~> 3.1)
+    cri (1.0.1)
+    eleven40 (1.2)
+      compass (>= 0.10.0.rc3)
+    fssm (0.2.7)
+    haml (3.1.1)
+    nanoc (3.1.7)
+      nanoc3 (>= 3.1.7)
+    nanoc3 (3.1.7)
+      cri (>= 1.0.0)
+    rack (1.2.2)
+    rdiscount (1.6.8)
+    sass (3.1.1)
+
+PLATFORMS
+  java
+  ruby
+
+DEPENDENCIES
+  activesupport
+  adsf
+  builder
+  eleven40
+  haml
+  nanoc
+  rdiscount
