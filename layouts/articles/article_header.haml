@@ -2,8 +2,5 @@
   = link_to @article[:title], @article
 .metadata
   - haml_tag(@subheadline_tag || 'h2') do
-    posted by
-    %span.author= @article[:author_name] || @site.config[:author_name]
-    ,
     %span.posted_at= @article[:created_at]
 

@@ -7,21 +7,21 @@
 %html.no-js{ :lang => "en" }
   <!--<![endif]-->
   %head
-    %meta{ :charset => "UTF-8" }/
+    %meta{ :charset => "UTF-8" }
 
     -#
       Always force latest IE rendering engine (even in intranet) & Chrome Frame
       Remove this if you use the .htaccess
-    %meta{ "http-equiv" => "X-UA-Compatible", :content => "IE=edge,chrome=1" }/
+    %meta{ "http-equiv" => "X-UA-Compatible", :content => "IE=edge,chrome=1" }
 
     %title= "Assets.io" << (@item[:title].blank? ? '' : " :: #{@item[:title]}")
 
     -# %title= (@item[:title].blank? ? 'Assets.io - You cook, we serve' : @item[:title])
-    %meta{ :name => "description", :content => "Deliciously minified website assets, served on a plate of fine CDN." }/
-    %meta{ :name => "author", :content => "Assets.io" }/
+    %meta{ :name => "description", :content => "Deliciously minified website assets, served on a plate of fine CDN." }
+    %meta{ :name => "author", :content => "Assets.io" }
 
     -# Mobile viewport optimized: j.mp/bplateviewport
-    %meta{ :content => "width=device-width, initial-scale=1.0", :name => "viewport" }/
+    %meta{ :content => "width=device-width, initial-scale=1.0", :name => "viewport" }
 
     -# Place favicon.ico and apple-touch-icon.png in the root of your domain and delete these references
     -# %link{ :href => "/favicon.ico", :rel => "shortcut icon" }/
@@ -49,7 +49,8 @@
       #header
         .content_wrap
           #logo
-            %img{ :src => "/assets/img/logo.png" }
+            %a{ :href => "/" }
+              %img{ :src => "/assets/img/logo.png" }
           #nav
             %a{ :href => "/" }
               Home
@@ -106,8 +107,8 @@
     -#
       Javascript at the bottom for fast page loading
       Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if necessary
-    %script{ :src => "//ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.js" }
-    :javascript
+    -# %script{ :src => "//ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.js" }
+    -#:javascript
       window.jQuery || document.write("<script src='/assets/js/jquery.js'>\x3C/script>")
 
     :javascript
