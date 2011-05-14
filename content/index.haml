@@ -2,6 +2,34 @@
   #teaser_right
   #teaser_left
 .box
+  #quotes
+    .quote.active
+      %h2.teaser "In 2006, the average online shopper expected a web page to load in 4 seconds. Today, that same shopper expects your page to load in 2 seconds or less.
+      %span.source - Forrester Consulting
+    .quote
+      %h2.teaser "Users who experience a 2-second site slowdown make almost 2% fewer queries, click 3.75% less often, and report being significantly less satisfied with their overall experience."
+      %span.source - Microsoft and Google
+    .quote
+      %h2.teaser "Issues with application performance are affecting overall business revenues by up to 9%."
+      %span.source - Aberdeen Group
+    .quote
+      %h2.teaser "Amazon found that it increased revenue by 1% for every 100 milliseconds of improvement."
+      %span.source - Amazon
+    .quote
+      %h2.teaser "Yahoo increased traffic by 9% for every 400 milliseconds of improvement."
+      %span.source - Yahoo
+
+  .feature
+    %p Benefit from CDN-delivered, packaged, minified and compressed Javascript and CSS without touching your infrastructure. Use our simple Javascript API and we do all the heavy lifting.
+  .feature.last
+    %ul
+      %li
+        %a{ :href => "/howitworks/"}
+          See how it works
+      %li
+        %a{ :href => "/signup/"}
+          Stay up to date. Be among the first to use Assets.io, the closed beta is starting July 4
+.box
   .feature
     %h3 Minification
     %p CSS and JS files are automatically minified, making them much smaller by removing whitespace and comments and shortening identifiers, so less bandwidth is needed.
@@ -11,7 +39,6 @@
 
     %h3 Content Delivery Network
     %p All your assets are cached and distributed through a CDN, a network of servers around the world to serve your files from the closest location to the the site's visitor.
-
   .feature.last
     %h3 Fast setup
     %p The setup is as easy as loading your assets through our simple Javascript API instead of referencing them directly. We fetch the assets from your server automatically, no manual file handling needed.
