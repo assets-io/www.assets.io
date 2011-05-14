@@ -100,7 +100,9 @@ body
 
 .content_pad
   :padding-top 60px
-
+  @media screen
+    @media (max-width: 767px)
+      :padding-top 20px
 h1
   :font-size 2em
   :color $text-color
@@ -109,7 +111,7 @@ h1
   @media screen
     @media (max-width: 767px)
       :font-size 1.5em
-      :margin 30px 0 10px 0
+      :margin 0 0 10px 0
 h2
   :font-size 1.75em
   :color $text-color
@@ -164,10 +166,10 @@ pre.code
 
 #main
   @include eleven40-container
-  :padding 0 40px 40px 40px
+  :padding 0 40px 0 40px
   @media screen
     @media (max-width: 767px)
-      :padding 0 20px 20px 20px
+      :padding 0 20px 0 20px
       @include eleven40-mobile-column
       :line-height 140%
 
@@ -217,10 +219,13 @@ pre.code
   :margin-bottom 40px
 
   #quotes
-    :height 100px
+    :height 120px
     :margin-bottom 20px
     :position relative
     :overflow hidden
+    @media screen
+      @media (max-width: 767px)
+        :height 130px
   .quote
     @include eleven40-twelvecol
     @include eleven40-last
@@ -348,3 +353,7 @@ pre.code
   .response
     :font-size 0.9em
     +single-text-shadow(#fff,1px,1px,4px)
+
+.facebook
+  :margin-top 20px
+  :text-align center

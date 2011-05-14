@@ -33,7 +33,7 @@
     :javascript
       assets.on("www.assets.io"); // oder assets.force(true);
       assets.base("http://www.assets.io");
-      assets.css("/assets/css/style.css", 2011051402);
+      assets.css("/assets/css/style.css", 2011051404);
 
     -# CSS: implied media="all"
     -# %link{ :href => "/assets/css/style.css", :media => "all", :rel => "stylesheet" }/
@@ -74,6 +74,7 @@
                 -# = render 'articles/comments', :article => @item
         - else
           = yield
+          = render 'facebook'
       #container_footer
     #footer
       .content_wrap
