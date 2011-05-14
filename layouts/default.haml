@@ -7,7 +7,7 @@
 %html.no-js{ :lang => "en" }
   <!--<![endif]-->
   %head
-    %meta{ :charset => "utf-8" }/
+    %meta{ :charset => "UTF-8" }/
 
     -#
       Always force latest IE rendering engine (even in intranet) & Chrome Frame
@@ -29,14 +29,20 @@
 
     %link(rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://feeds.feedburner.com/assetsio")
 
+    %script{ :type => "text/javascript", :src => "http://api.assets.io/?d1275agyk90u3c"}
+    :javascript
+      assets.on("www.assets.io"); // oder assets.force(true);
+      assets.base("http://www.assets.io");
+      assets.css("/assets/css/style.css", 20110514);
+
     -# CSS: implied media="all"
-    %link{ :href => "/assets/css/style.css", :media => "all", :rel => "stylesheet" }/
+    -# %link{ :href => "/assets/css/style.css", :media => "all", :rel => "stylesheet" }/
 
     -# Uncomment if you are specifically targeting less enabled mobile browsers
     -# %link{ :href => "css/handheld.css?v=1", :media => "handheld", :rel => "stylesheet" }/
 
     -# All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects
-    %script{ :src => "/assets/js/modernizr.js" }
+    -# %script{ :src => "/assets/js/modernizr.js" }
 
   %body
     #container
@@ -91,6 +97,8 @@
     :javascript
       window.jQuery || document.write("<script src='/assets/js/jquery.js'>\x3C/script>")
 
+    :javascript
+      assets.js("/assets/js/modernizr.js");
     -# %script{ :src => "js/plugins.js" }
     -# %script{ :src => "js/script.js" }
 
