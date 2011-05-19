@@ -104,18 +104,20 @@
             Martin Rehfeld &amp; Thomas Klokosch
             %br
             &copy; 2011 Assets.io
+            %br
+          = render 'clicky'
 
     -#
       Javascript at the bottom for fast page loading
       Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if necessary
-    -# %script{ :src => "//ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.js" }
-    -#:javascript
+    %script{ :src => "//ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.js" }
+    :javascript
       window.jQuery || document.write("<script src='/assets/js/jquery.js'>\x3C/script>")
 
     :javascript
       assets.js("/assets/js/modernizr.js");
-    -# %script{ :src => "js/plugins.js" }
-    -# %script{ :src => "js/script.js" }
+    %script{ :src => "assets/js/quotes.js" }
+    %script{ :src => "assets/js/site.js" }
 
     /[if lt IE 7 ]
       %script{ :src => "/js/dd_belatedpng.js" }
@@ -124,8 +126,9 @@
 
     -#  asynchronous google analytics: mathiasbynens.be/notes/async-analytics-snippet
     -#  change the UA-XXXXX-X to be your site's ID
-    :javascript
+    -# :javascript
       var _gaq=[["_setAccount","UA-23261777-1"],["_trackPageview"]];
       (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
       g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
       s.parentNode.insertBefore(g,s)}(document,"script"));
+
