@@ -29,9 +29,12 @@
 
     %link(rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://feeds.feedburner.com/assetsio")
 
-    %script{ :type => "text/javascript", :src => "http://api.assets.io/?d1275agyk90u3c"}
+    -# All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects
+    %script{ :src => "/assets/js/modernizr-min.js" }
+    -# ... and the Assets.io API
+    %script{ :src => "http://api.assets.io/?d1275agyk90u3c" }
     :javascript
-      assets.on("www.assets.io"); // oder assets.force(true);
+      assets.on("www.assets.io");
       assets.base("http://www.assets.io");
       assets.css("/assets/css/style.css", 20110517);
 
@@ -40,9 +43,6 @@
 
     -# Uncomment if you are specifically targeting less enabled mobile browsers
     -# %link{ :href => "css/handheld.css?v=1", :media => "handheld", :rel => "stylesheet" }/
-
-    -# All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects
-    -# %script{ :src => "/assets/js/modernizr.js" }
 
   %body
     #container
@@ -107,17 +107,8 @@
             %br
           = render 'clicky'
 
-    -#
-      Javascript at the bottom for fast page loading
-      Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if necessary
-    %script{ :src => "//ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.js" }
     :javascript
-      window.jQuery || document.write("<script src='/assets/js/jquery.js'>\x3C/script>")
-
-    :javascript
-      assets.js("/assets/js/modernizr.js");
-    %script{ :src => "assets/js/quotes.js" }
-    %script{ :src => "assets/js/site.js" }
+      assets.js("/assets/js/jquery-min.js /assets/js/quotes.js /assets/js/site.js", 20110521);
 
     /[if lt IE 7 ]
       %script{ :src => "/js/dd_belatedpng.js" }
@@ -131,4 +122,3 @@
       (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
       g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
       s.parentNode.insertBefore(g,s)}(document,"script"));
-
