@@ -1,7 +1,6 @@
-/*
-* Quotes plugin
-*/
-(function($){
+// Quotes plugin
+
+(function ($) {
 
   var settings = {
     'cycleSpeed'     : 9000,
@@ -17,7 +16,7 @@
   var timer;
 
   var methods = {
-    init : function( options ) {
+    init : function ( options ) {
 
       // local copy of this
       var $this = $(this);
@@ -27,16 +26,18 @@
       items.animate(settings.start, 1000);
 
     },
-    play : function() {
+
+    play : function () {
 
       // set up a timer that calls the update method in the specified time interval
       // set animated state to true
-      timer = setInterval( function(){ methods.update() }, settings.cycleSpeed);
+      timer = setInterval( function () { methods.update(); }, settings.cycleSpeed);
       animated = true;
       methods.update();
 
     },
-    stop : function() {
+
+    stop : function () {
 
       // kill the timer, set animation to false
       // index is kept intact
@@ -44,12 +45,12 @@
       animated = false;
 
     },
-    update : function() {
 
-      if(animated){
+    update : function () {
 
+      if (animated) {
         // if index gets out of range, reset to zero
-        if( index >= items.length ) index = 0;
+        if ( index >= items.length ) index = 0;
 
         // animated current index element
         items.eq(index).animate(settings.target, settings.animationSpeed);
@@ -60,12 +61,12 @@
     }
   };
 
-  $.fn.quotes = function(method, options) {
+  $.fn.quotes = function( method, options ) {
 
-    return this.each(function() {
+    return this.each(function () {
 
       // merge options with default settings
-      if(options) $.extend(settings, options);
+      if (options) $.extend(settings, options);
 
       // Method calling logic
       if ( methods[method] ) {
