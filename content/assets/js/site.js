@@ -1,3 +1,3 @@
-$(document).ready(function(){
+$(function () {
   $("#quotes").quotes("init").quotes("play");
 });
