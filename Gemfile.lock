@@ -15,6 +15,8 @@ GEM
       compass (>= 0.10.0.rc3)
     fssm (0.2.7)
     haml (3.1.1)
+    i18n (0.6.0)
+    mime-types (1.16)
     nanoc (3.1.7)
       nanoc3 (>= 3.1.7)
     nanoc3 (3.1.7)
@@ -33,5 +35,7 @@ DEPENDENCIES
   builder
   eleven40
   haml
+  i18n
+  mime-types
   nanoc
   rdiscount
