@@ -33,7 +33,7 @@ body,html
   :height 100%
   :width  100%
 body
-  :background   url('../img/main_background.jpg') top left #fff
+  :background   url('../img/main_background.jpg') top left #CCC
   :font-family  "Helvetica Neue", Helvetica, Arial, sans-serif
   :line-height  150%
   :height       100%
@@ -43,7 +43,7 @@ body
 
 #header
   :height     200px
-  :background url('../img/header_background.jpg') repeat-x top left transparent
+  :background url('../img/header_background.jpg') repeat-x top left #9a3114
   +single-box-shadow
   @include eleven40-container
   :padding 0 40px
@@ -208,6 +208,16 @@ pre.code
     @media screen
       @media (max-width: 767px)
         :display none
+
+#howitworks
+  :height 290px
+  :background url('../img/howitworks.png') no-repeat top center transparent
+  :z-index 999
+  @include eleven40-row
+
+  @media screen
+    @media (max-width: 900px)
+      :display none
 
 .box
   :background-color #fff
