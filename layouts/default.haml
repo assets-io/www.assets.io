@@ -16,7 +16,6 @@
 
     %title= "Assets.io" << (@item[:title].blank? ? '' : " :: #{@item[:title]}")
 
-    -# %title= (@item[:title].blank? ? 'Assets.io - You cook, we serve' : @item[:title])
     %meta{ :name => "description", :content => "Deliciously minified website assets, served on a plate of fine CDN." }
     %meta{ :name => "author", :content => "Assets.io" }
 
@@ -66,12 +65,11 @@
           .content_wrap
             .content_pad
               .eightcol
-                = render 'articles/article_header', :article => @item, :headline_tag => "h2", :subheadline_tag => 'h5'
+                = render 'articles/article_header', :article => @item, :headline_tag => 'h2', :subheadline_tag => 'h5'
                 = yield # actual article content
                 = render 'articles/addthis'
               .fourcol.last
                 = render 'articles/latest'
-                -# = render 'articles/comments', :article => @item
         - else
           = yield
           = render 'facebook'
