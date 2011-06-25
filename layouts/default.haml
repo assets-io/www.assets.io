@@ -31,11 +31,10 @@
     -# All JavaScript at the bottom, except for the Assets.io API
     %script{ :src => "http://api.assets.io/b6/?d1275agyk90u3c" }
     :javascript
-      'article aside footer header nav section time'.replace(/\w+/g,function(n){document.createElement(n)})
       assets.on('www.assets.io');
       assets.base('http://www.assets.io');
-      assets.css('/assets/css/style.css', 20110606);
-      assets.js('/assets/js/jquery-min.js /assets/js/quotes.js /assets/js/site.js', 20110606);
+      assets.css('/assets/css/style.css', 20110626);
+      assets.js('/assets/js/jquery-min.js /assets/js/quotes.js /assets/js/site.js', 20110626);
 
 
     -# CSS: implied media="all"
@@ -107,9 +106,8 @@
           = render 'clicky'
 
     /[if lt IE 7 ]
-      %script{ :src => "/js/dd_belatedpng.js" }
       :javascript
-        //DD_belatedPNG.fix('img, .png_bg');
+        'article aside footer header nav section time'.replace(/\w+/g,function(n){document.createElement(n)})
 
     -#  asynchronous google analytics: mathiasbynens.be/notes/async-analytics-snippet
     -#  change the UA-XXXXX-X to be your site's ID
