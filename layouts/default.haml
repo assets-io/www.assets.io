@@ -38,7 +38,9 @@
       assets.on('www.assets.io');
       assets.base('http://www.assets.io');
       assets.css('/assets/css/style.css', 20110626);
-      assets.js('/assets/js/jquery-min.js /assets/js/quotes.js /assets/js/site.js', 20110626);
+      assets.js('/assets/js/jquery-min.js /assets/js/quotes.js /assets/js/site.js', 20110626, function () {
+        $('html').removeClass('no-js');
+      });
 
     -# CSS: implied media="all"
     -# %link{ :href => "/assets/css/style.css", :media => "all", :rel => "stylesheet" }/
@@ -107,7 +109,6 @@
             &copy; 2011 Assets.io
             %br
           = render 'clicky'
-
     -#  asynchronous google analytics: mathiasbynens.be/notes/async-analytics-snippet
     -#  change the UA-XXXXX-X to be your site's ID
     -# :javascript
