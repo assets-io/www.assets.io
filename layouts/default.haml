@@ -30,10 +30,9 @@
 
     -# All JavaScript at the bottom, except for the Assets.io API
     %script{ :src => "http://api.assets.io/b6/" }
-    /[if lt IE 7 ]
-      :javascript
-        'article aside footer header nav section time'.replace(/\w+/g,function(n){document.createElement(n)})
+
     :javascript
+      'article aside figcaption figure footer header hgroup nav section time'.replace(/\w+/g,function(n){document.createElement(n)});
       assets.account('d1275agyk90u3c');
       assets.on('www.assets.io');
       assets.base('http://www.assets.io');
