@@ -30,12 +30,14 @@
 
     -# All JavaScript at the bottom, except for the Assets.io API
     %script{ :src => "http://api.assets.io/b6/?d1275agyk90u3c" }
+    /[if lt IE 7 ]
+      :javascript
+        'article aside footer header nav section time'.replace(/\w+/g,function(n){document.createElement(n)})
     :javascript
       assets.on('www.assets.io');
       assets.base('http://www.assets.io');
       assets.css('/assets/css/style.css', 20110626);
       assets.js('/assets/js/jquery-min.js /assets/js/quotes.js /assets/js/site.js', 20110626);
-
 
     -# CSS: implied media="all"
     -# %link{ :href => "/assets/css/style.css", :media => "all", :rel => "stylesheet" }/
@@ -104,10 +106,6 @@
             &copy; 2011 Assets.io
             %br
           = render 'clicky'
-
-    /[if lt IE 7 ]
-      :javascript
-        'article aside footer header nav section time'.replace(/\w+/g,function(n){document.createElement(n)})
 
     -#  asynchronous google analytics: mathiasbynens.be/notes/async-analytics-snippet
     -#  change the UA-XXXXX-X to be your site's ID
