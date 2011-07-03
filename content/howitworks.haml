@@ -247,3 +247,107 @@ title: How it works
             alert('My JS asset has completed loading');
           });
 
+.content_wrap
+  .content_pad
+    .twelvecol
+      %h2 Examples
+      %p Here are two examples of using the API in one simple and one advanced setup.
+
+.content_wrap
+  .content_pad
+    .fourcol
+      %h2 Simple example
+      %p In this example, two CSS and three JS files are loaded from two different server locations. The CSS is loaded from the default server given in the .live() method call. The JS is loaded from the server given in the .base() function further down below.
+      %p In development, these assets will be loaded seperately, on the live environment on "www.mysite.com", the Assets.io API will kick in and serve the assets minified and concatenated, all will share the same version id.
+    .eightcol.last
+      %pre.code
+        :escaped
+          <script src="http://api.assets.io/#{latest_api_version}/"></script>
+          <script>
+
+            // Set the account id
+            // This id is provided to you in the Assets.io management interface
+            assets.account('<your-account-id>');
+
+            // Setting the live host to enable Assets.io
+            // when your site is deployed
+            // Assets.io won't deliver your assets unless your documents are served from this server
+            assets.live("http://www.mysite.com");
+
+            // If you enable this line, your assets will be requested from assets.io
+            // even when you are developing locally
+            // assets.force();
+
+            // Set a global asset version id
+            // If you change this number and deploy your site,
+            // a new version of the all assets will be requested
+            // immediately on the next request, unless a seperate
+            // version id is given in the request
+            assets.version( 12345 );
+
+            // Load two CSS files, they will be minified and concatenated
+            assets.css('/css/base.css /css/navigation.css');
+
+            // Change the asset server
+            // Below this line, all requests to assets will be made against this new URL
+            assets.base('http://js.mysite.com');
+
+            // Load three js files from the new location
+            assets.js('/js/jquery.js /js/plugin.js /js/site.js');
+          </script>
+
+.content_wrap
+  .content_pad
+    .fourcol
+      %h2 Advanced example
+      %p In this example, two CSS files are loaded from the default location given by .live().
+      %p After that, a single non-minified CSS file is loaded from a different location and with a different version id.
+      %p The next JS files are going to be loaded from a different location given by a call to the .base() method.
+      %p The last assets requested are three JS files, again served by a different host, but this time, the host is given in the options parameter of the .js() method. As no version number is given, the default "1" will be used, that has been set above.
+    .eightcol.last
+      %pre.code
+        :escaped
+          <script src="http://api.assets.io/#{latest_api_version}/"></script>
+          <script>
+
+            // Set the account id
+            // This id is provided to you in the Assets.io management interface
+            assets.account('<your-account-id>');
+
+            // Setting the live host to enable Assets.io
+            // when your site is deployed
+            // Assets.io won't deliver your assets unless your documents are served from this server
+            assets.live("//www.mysite.com");
+
+            // Set a global asset version id
+            // If you change this number and deploy your site,
+            // a new version of the all assets will be requested
+            // immediately on the next request, unless a seperate
+            // version id is given in the request
+            assets.version( 1 );
+
+            // Load two CSS files, they will be minified and concatenated
+            // They will be requested from "www.mysite.com" width the version id "1"
+            assets.css('/css/base.css /css/navigation.css');
+
+            // One CSS file, will NOT be minified and requested from "css.mysite.com"
+            // with the version id 'just-a-test'
+            assets.css('/css/i_am_readable.css', {
+                base : 'http://css.mysite.com/',
+                version : 'just-a-test',
+                minify : false
+              });
+
+            // Setting the new base, all subsequent requests will be made against "js.mysite.com"
+            assets.base("http://js.mysite.com");
+
+            // Load two JS files, minified and concatenated, with version id "12345"
+            assets.js("/js/app.js /js/data.js", 12345);
+
+            // Load three JS files, minified and concatenated, but from different host
+            assets.js("/js/extra/one.js /js/extra/two.js /js/extra/three.js", {
+                base : 'assets.mysite.com'
+              });
+
+          </script>
+
