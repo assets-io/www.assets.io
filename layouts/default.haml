@@ -29,7 +29,7 @@
     %link(rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://feeds.feedburner.com/assetsio")
 
     -# All JavaScript at the bottom, except for the Assets.io API
-    %script{ :src => "http://api.assets.io/b6/" }
+    %script{ :src => "http://api.assets.io/b7/" }
 
     :javascript
       (function () {
@@ -38,10 +38,9 @@
         'article aside figcaption figure footer header hgroup nav section time'.replace(/\w+/g,function(n){document.createElement(n)});
       })();
       assets.account('d1275agyk90u3c');
-      assets.on('www.assets.io');
-      assets.base('http://www.assets.io');
-      assets.css('/assets/css/style.css', 20110629);
-      assets.js('/assets/js/jquery-min.js /assets/js/quotes.js /assets/js/site.js', 20110629);
+      assets.live('http://www.assets.io');
+      assets.css('/assets/css/style.css', 20110704);
+      assets.js('/assets/js/jquery-min.js /assets/js/quotes.js /assets/js/site.js', 20110704);
 
     -# CSS: implied media="all"
     -# %link{ :href => "/assets/css/style.css", :media => "all", :rel => "stylesheet" }/
