@@ -2,6 +2,8 @@
 title: How it works
 ---
 
+- latest_api_version = 'b6'
+
 #howitworks
 .content_wrap
   .content_pad
@@ -32,11 +34,157 @@ title: How it works
           <head>
             <title>My website</title>
 
-            <script src="http://api.assets.io/?<your-account-id>"></script>
+            <script src="http://api.assets.io/#{latest_api_version}/"></script>
 
             <script>
-              assets.css("/css/base.css /css/navigation.css");
-              assets.js("/js/jquery.js /js/plugin.js /js/site.js");
+              assets.account('<your-account-id>');
+              assets.css('/css/base.css /css/navigation.css');
+              assets.js('/js/jquery.js /js/plugin.js /js/site.js');
             </script>
 
           </head>
+  %section.api-documentation
+    %h1 Detailed Documentation
+
+    %h2 Loading the Javascript API
+    %p Before any Assets.io functionality can be used within your website, the API script needs to be loaded.
+    %p The latest API version is '#{latest_api_version}'; load it from your document head:
+    %pre.code
+      :escaped
+        <script src="http://api.assets.io/#{latest_api_version}/"></script>
+
+        <!-- or load the API with SSL if your page is being served with SSL -->
+        <script src="https://api.assets.io/#{latest_api_version}/"></script>
+
+    %h2 Specifying the account
+    %p.method-signature assets.account( account-id )
+    %p
+      As an Assets.io user you will have at least one account. The account maps to a so called distribution within the Content Delivery Network and is basically a unit of accounting. Statistics are gathered per account and you get to set the allowed source hosts per account
+      %a(href="https://secure.assets.io") in the Assets.io management interface
+      \. It is generally a good idea to use a different account for each of your websites.
+    %pre.code
+      :escaped
+        assets.account('dld6ysvane9zb');
+
+    %h2#assets-on Setting the live host
+    %p.method-signature assets.on( live-host-fqdn )
+    %p
+      The Assets.io Javascript API has two modes of operation:
+      %ul
+        %li Development mode: When your website is not served from the live host (e.g. your local development webserver or even from the filesystem), all assets will be loaded individually and directly from their respective sources. No CDN delivery, packaging or minification will be active.
+        %li Live mode: Only when your website is served from the specified live host, the Assets.io service will kick in and turbo-charge your assets.
+      %aside
+        Aside: You can force "Live mode" by calling
+        %a(href="#assets-force") assets.force()
+        to test the live behaviour locally.
+    %pre.code
+      :escaped
+        assets.on('www.my-site.com');
+
+    %h2#assets-force Forcing live mode
+    %p.method-signature assets.force( )
+    %p Force the Javascript API into "Live mode" even while testing locally.
+    %p
+      Please bear in mind that in live mode all assets will be requested by the Assets.io servers. Thus they need to be available from the public internet. The API also has to able to construct fully qualified URLs from the source locations you specified. See
+      %a(href="#assets-base") assets.base( base-url )
+      for a matrix of supported source location specifications.
+    %pre.code
+      :escaped
+        assets.force();
+
+    %h2#assets-base Setting the assets base url
+    %p.method-signature assets.base( base-url )
+    %p
+      Setting an assets base allows you to load assets from a different host than your page is served from. The assets base only applies to source location that are given relative to the document root (e.g. /css/site.css) or the current page (e.g. ../css/site.css). The assets base can also be relevant when you force the API into "Live mode" with
+      %a(href="#assets-force") assets.force()
+    %p Use this matrix to identify, if a certain source location style can be used in the different modes of operation:
+    %table
+      %thead
+        %tr
+          %td Here
+          %td Be
+          %td Dragons
+      %tbody
+        %tr
+          %td(colspan="3") TODO
+
+    %pre.code
+      :escaped
+        assets.base('assets.my-site.com');
+
+    %h2#assets-debug Enable debugging
+    %p.method-signature assets.debug( )
+    %p
+      Enable extra debug information. In "Live Mode" the Assets.io comment at the top of any delivered asset will include extra information about the source locations and given options.
+    %pre.code
+      :escaped
+        assets.debug();
+
+    %h2#assets-minifiy Enable/Disable minification
+    %p.method-signature assets.minify( boolean )
+    %p
+      Normally all assets will be minified before delivering them, but you can turn this feature off if you want to keep your sources readable.
+    %pre.code
+      :escaped
+        assets.minify(false);
+
+    %h2#assets-version Set the assets version (gloablly)
+    %p.method-signature assets.version( version-id )
+    %p
+      Once assets have been built they are delivered from the CDN cache for subsequent requests. If any of your sources changes, theses changes can not be reflected in the built asset. By specifying a (different) version you basically make it a new asset and force a re-build. The version-id can be either a string (e.g. 'v1.0.0') or a plain number.
+    %pre.code
+      :escaped
+        assets.version(1);
+
+    %h2#assets-css Loading CSS assets
+    %p.method-signature assets.css( sources, [ version ], [ options ] )
+    %p.method-signature assets.css( sources-with-options )
+    %p
+      Load a package of CSS sources. In "Development mode" each source will be loaded individually.
+    %p Options set gloabally (on, base, version, force, debug, minify) can be overridden by passing an options object.
+
+    %pre.code
+      :escaped
+        assets.css('/css/base.css /css/navigation.css');
+
+        // with version
+        assets.css('/css/base.css /css/navigation.css', 23);
+
+        // sources may also be given as an array
+        assets.css(['/css/base.css', '/css/navigation.css'], 23);
+
+        // with options
+        assets.css('/css/base.css /css/navigation.css', {
+          version: 23,
+          base: 'http://css.my-site.com',
+          force: true
+        });
+
+    %h2#assets-js Loading JavaScript assets
+    %p.method-signature assets.js( sources, [ version ], [ options ], [ callback ] )
+    %p.method-signature assets.js( options, [ callback ] )
+    %p
+      Load a package of Javascript sources and optionally execute the given callback function. In "Development mode" each source will be loaded individually.
+    %p Options set gloabally (on, base, version, force, debug, minify) can be overridden by passing an options object.
+
+    %pre.code
+      :escaped
+        assets.js('/js/jquery.js /js/plugin.js /js/site.js');
+
+        // with version
+        assets.js('/js/jquery.js /js/plugin.js /js/site.js', 23);
+
+        // sources may also be given as an array
+        assets.js(['/js/jquery.js', '/js/plugin.js', '/js/site.js'], 23);
+
+        // with options
+        assets.js('/js/jquery.js /js/plugin.js /js/site.js',
+          version: 23,
+          base: 'http://js.my-site.com',
+          force: true
+        });
+
+        // with callback
+        assets.js('/js/jquery.js /js/plugin.js /js/site.js', 23, function () {
+          alert('My JS asset has completed loading');
+        });
