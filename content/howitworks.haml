@@ -2,7 +2,7 @@
 title: How it works
 ---
 
-- latest_api_version = 'b6'
+- latest_api_version = 'b7'
 
 #howitworks
 .content_wrap
@@ -38,12 +38,11 @@ title: How it works
 
             <script>
               assets.account('<your-account-id>');
+              assets.live('http://www.my-site.com');
               assets.css('/css/base.css /css/navigation.css');
               assets.js('/js/jquery.js /js/plugin.js /js/site.js');
             </script>
-
           </head>
-
   .twelvecol
     %section.api-documentation
       %h1 Detailed Documentation
@@ -58,7 +57,7 @@ title: How it works
       :escaped
         <script src="http://api.assets.io/#{latest_api_version}/"></script>
 
-        <!-- or load the API with SSL if your page is being served with SSL -->
+        <!-- or load the API with SSL -->
         <script src="https://api.assets.io/#{latest_api_version}/"></script>
 
 .content_wrap
@@ -80,7 +79,7 @@ title: How it works
   .content_pad
     .twelvecol
       %h2#assets-on Setting the live host
-      %p.method-signature assets.live( live-host-fqurl )
+      %p.method-signature assets.live( live-host-url )
     .sixcol
       %p
         The Assets.io Javascript API has two modes of operation:
@@ -91,15 +90,14 @@ title: How it works
           %li
             %strong Live mode:
             Only when your website is served from the specified live host, the Assets.io service will kick in and turbo-charge your assets.
-        %aside
-          %strong Aside:
+        %p
           You can force "Live mode" by calling
           %a(href="#assets-force") assets.force()
           to test the live behaviour locally.
     .sixcol.last
       %pre.code
         :escaped
-          assets.live('//www.my-site.com');
+          assets.live('http://www.my-site.com');
 
 .content_wrap
   .content_pad
@@ -109,9 +107,7 @@ title: How it works
     .sixcol
       %p Force the Javascript API into "Live mode" even while testing locally.
       %p
-        Please bear in mind that in live mode all assets will be requested by the Assets.io servers. Thus they need to be publicly available on the internet. The API also has to able to construct fully qualified URLs from the source locations you specified. See
-        %a(href="#assets-base") assets.base( base-url )
-        for a matrix of supported source location specifications.
+        Please bear in mind that in live mode all assets will be requested by the Assets.io servers. Thus they need to be publicly available on the internet.
     .sixcol.last
       %pre.code
         :escaped
@@ -124,28 +120,13 @@ title: How it works
       %p.method-signature assets.base( base-url )
     .sixcol
       %p
-        Setting an assets base allows you to load assets from a different host than your page is served from. The assets base only applies to source locations that are given relative to the document root (e.g. /css/site.css) or the current page (e.g. ../css/site.css). The assets base can also be relevant when you force the API into "Live mode" with
-        %a(href="#assets-force") assets.force()
+        Setting an assets base allows you to load assets from a different host than your live host. The assets base only applies to source locations that are given relative to the document root (e.g. /css/site.css) or the current page (e.g. ../css/site.css).
       %p
-        %strong If you don't want to care about all this just follow a simple rule: Always set a base and never reference your assets relative to the document served (e.g. "../../css/site.css").
-      %p However, if for some reason you have to use a different path setup, use this matrix to identify, if a certain source location style can be used in the different modes of operation:
+        %strong If you like things to just work (even when viewing your page from the filesystem), follow a simple rule: Always set a live host and never reference your assets relative to the document served (e.g. "../../css/site.css").
     .sixcol.last
       %pre.code
         :escaped
-          assets.base('assets.my-site.com');
-
-.content_wrap
-  .content_pad
-    .twelvecol
-      %table
-        %thead
-          %tr
-            %td Here
-            %td Be
-            %td Dragons
-        %tbody
-          %tr
-            %td(colspan="3") TODO
+          assets.base('http://assets.my-site.com');
 
 .content_wrap
   .content_pad
@@ -207,11 +188,12 @@ title: How it works
           // sources may also be given as an array
           assets.css(['/css/base.css', '/css/navigation.css'], 23);
 
-          // with options
-          assets.css('/css/base.css /css/navigation.css', {
+          // with options only
+          assets.css({
+            src:     '/css/base.css /css/navigation.css',
             version: 23,
-            base: 'http://css.my-site.com',
-            force: true
+            base:    'http://css.my-site.com',
+            force:   true
           });
 
 .content_wrap
@@ -219,7 +201,7 @@ title: How it works
     .twelvecol
       %h2#assets-js Loading JavaScript assets
       %p.method-signature assets.js( sources, [ version ], [ options ], [ callback ] )
-      %p.method-signature assets.js( options, [ callback ] )
+      %p.method-signature assets.js( sources-with-options, [ callback ] )
     .sixcol
       %p
         Load a package of Javascript sources and optionally execute the given callback function. In "Development mode" each source will be loaded individually.
@@ -235,11 +217,12 @@ title: How it works
           // sources may also be given as an array
           assets.js(['/js/jquery.js', '/js/plugin.js', '/js/site.js'], 23);
 
-          // with options
-          assets.js('/js/jquery.js /js/plugin.js /js/site.js',
+          // with options only
+          assets.js({
+            src:     '/js/jquery.js /js/plugin.js /js/site.js',
             version: 23,
-            base: 'http://js.my-site.com',
-            force: true
+            base:    'http://js.my-site.com',
+            force:   true
           });
 
           // with callback
@@ -257,7 +240,7 @@ title: How it works
   .content_pad
     .fourcol
       %h2 Simple example
-      %p In this example, two CSS and three JS files are loaded from two different server locations. The CSS is loaded from the default server given in the .live() method call. The JS is loaded from the server given in the .base() function further down below.
+      %p In this example, two CSS and three JS files are loaded from a single server locations. The assets are loaded from the default server given in the .live() method call.
       %p In development, these assets will be loaded seperately, on the live environment on "www.mysite.com", the Assets.io API will kick in and serve the assets minified and concatenated, all will share the same version id.
     .eightcol.last
       %pre.code
@@ -267,6 +250,7 @@ title: How it works
 
             // Set the account id
             // This id is provided to you in the Assets.io management interface
+            // at https://secure.assets.io
             assets.account('<your-account-id>');
 
             // Setting the live host to enable Assets.io
@@ -274,7 +258,7 @@ title: How it works
             // Assets.io won't deliver your assets unless your documents are served from this server
             assets.live("http://www.mysite.com");
 
-            // If you enable this line, your assets will be requested from assets.io
+            // If you enable this line, your assets will be requested from Assets.io
             // even when you are developing locally
             // assets.force();
 
@@ -288,10 +272,6 @@ title: How it works
             // Load two CSS files, they will be minified and concatenated
             assets.css('/css/base.css /css/navigation.css');
 
-            // Change the asset server
-            // Below this line, all requests to assets will be made against this new URL
-            assets.base('http://js.mysite.com');
-
             // Load three js files from the new location
             assets.js('/js/jquery.js /js/plugin.js /js/site.js');
           </script>
@@ -302,8 +282,8 @@ title: How it works
       %h2 Advanced example
       %p In this example, two CSS files are loaded from the default location given by .live().
       %p After that, a single non-minified CSS file is loaded from a different location and with a different version id.
-      %p The next JS files are going to be loaded from a different location given by a call to the .base() method.
-      %p The last assets requested are three JS files, again served by a different host, but this time, the host is given in the options parameter of the .js() method. As no version number is given, the default "1" will be used, that has been set above.
+      %p The next JS files are going to be loaded from yet another location given by a call to the .base() method.
+      %p The last assets requested are three JS files, again served by a different host, but this time, the host is given in the options parameter of the .js() method. As no version number is given, the global version "1" will be used, that has been set above.
     .eightcol.last
       %pre.code
         :escaped
@@ -312,12 +292,17 @@ title: How it works
 
             // Set the account id
             // This id is provided to you in the Assets.io management interface
+            // at https://secure.assets.io
             assets.account('<your-account-id>');
 
             // Setting the live host to enable Assets.io
             // when your site is deployed
-            // Assets.io won't deliver your assets unless your documents are served from this server
+            // Assets.io won't process your assets unless your documents are served from this server
             assets.live("//www.mysite.com");
+
+            // If you enable this line, your assets will be requested from Assets.io
+            // even when you are developing locally
+            // assets.force();
 
             // Set a global asset version id
             // If you change this number and deploy your site,
@@ -333,10 +318,10 @@ title: How it works
             // One CSS file, will NOT be minified and requested from "css.mysite.com"
             // with the version id 'just-a-test'
             assets.css('/css/i_am_readable.css', {
-                base : 'http://css.mysite.com/',
+                base : 'http://css.mysite.com',
                 version : 'just-a-test',
                 minify : false
-              });
+            });
 
             // Setting the new base, all subsequent requests will be made against "js.mysite.com"
             assets.base("http://js.mysite.com");
@@ -346,8 +331,7 @@ title: How it works
 
             // Load three JS files, minified and concatenated, but from different host
             assets.js("/js/extra/one.js /js/extra/two.js /js/extra/three.js", {
-                base : 'assets.mysite.com'
-              });
+                base : 'http://assets.mysite.com'
+            });
 
           </script>
-
